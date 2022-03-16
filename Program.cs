@@ -9,7 +9,8 @@ namespace Lab3
     {
         static void Main(string[] args)
         {
-            List<int> intList = GenerateReversedIntList(1000, 50000000);
+            //List<int> intList = GenerateReversedIntList(1000, 50000000);
+            List<int> intList = GenerateAlmostSortedIntList(10000000, 50000000);
 
             //List<double> doubleList = GenerateRandomDoubleList(100, 500);
             //choose 2.5% of elements and swap them for nearly sorted
@@ -34,7 +35,7 @@ namespace Lab3
             //InsertionSort<int> insertionSort = new InsertionSort<int>();
             //insertionSort.Sort(ref intList);
 
-            SelectionSort<int> selectionSort = new SelectionSort<int>();
+            //SelectionSort<int> selectionSort = new SelectionSort<int>();
             //selectionSort.Sort(ref intList);
 
             //quickSort.Sort(ref intList);
@@ -48,13 +49,13 @@ namespace Lab3
             //Console.WriteLine("[{0}]", string.Join(", ", doubleList.ToArray()));
 
             Console.WriteLine("QUICKSORT");
-            //QuickSort<int> quickSort = new QuickSort<int>();
+            QuickSort<int> quickSort = new QuickSort<int>();
             double number1 = 0;
             List<double> numbers = new List<double>(11);
             for (int i = 0; i < 11; i++)
             {
                 List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
-                double sort = TimeSort(selectionSort, intListCopy);
+                double sort = TimeSort(quickSort, intListCopy);
                 number1 += sort;
                 numbers.Add(sort);
             }
@@ -189,6 +190,16 @@ namespace Lab3
                 list.Add(random.Next(maxValue));
             }
             list.Sort();
+            for (int i = 0; i < (length*0.025); i++)
+            {
+                Random random1 = new Random();
+                Random random2 = new Random();
+                int index1 = random1.Next(length);
+                int index2 = random2.Next(length);
+                int number1 = list[index1];
+                list[index1] = list[index2];
+                list[index2] = number1;
+            }
 
             return list;
         }
